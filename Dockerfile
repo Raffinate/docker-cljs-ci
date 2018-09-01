@@ -20,5 +20,5 @@ ENV FIREFOX_BIN=/usr/bin/firefox-docker-launcher
 COPY --chown=0:0 chromium-docker-launcher.sh /usr/bin/chromium-docker-launcher
 RUN chmod 755 /usr/bin/chromium-docker-launcher
 
-# Specify firefox binary for karma
+# Specify chrome binary for karma
 ENV CHROME_BIN=/usr/bin/chromium-docker-launcher
