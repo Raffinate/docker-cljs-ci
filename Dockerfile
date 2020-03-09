@@ -1,7 +1,10 @@
-FROM clojure:alpine
+FROM clojure:latest
+
+# Updating
+RUN apt update
 
 # installing required packages
-RUN apk add dbus firefox-esr xvfb nodejs nodejs-npm chromium
+RUN apt install --yes dbus firefox-esr xvfb nodejs npm chromium
 
 # installing node dependecies to run clojurescript tests via karma
 RUN npm install --global --silent shadow-cljs karma-cli karma karma-cljs-test karma-firefox-launcher karma-chrome-launcher
@@ -22,3 +25,4 @@ RUN chmod 755 /usr/bin/chromium-docker-launcher
 
 # Specify chrome binary for karma
 ENV CHROME_BIN=/usr/bin/chromium-docker-launcher
+ENV CHROMIUM_BIN=/usr/bin/chromium-docker-launcher
