@@ -4,7 +4,7 @@ FROM clojure:alpine
 RUN apk add dbus firefox-esr xvfb nodejs nodejs-npm chromium
 
 # installing node dependecies to run clojurescript tests via karma
-RUN npm install --global --silent karma-cli karma karma-cljs-test karma-firefox-launcher karma-chrome-launcher
+RUN npm install --global --silent shadow-cljs karma-cli karma karma-cljs-test karma-firefox-launcher karma-chrome-launcher
 
 # required for applications that use dbus to start in container
 RUN dbus-uuidgen --ensure
