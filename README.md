@@ -1,28 +1,41 @@
-# docker-lein-karma
+# docker-cljs-ci
 
 ## Description
-Simple docker container designed to run clojure and clojurescript tests with gitlab CI process.
+Simple docker container designed to run clojure and clojurescript tests in CI process.
 
 Container is based on clojure:alpine official container. 
 
-It includes lein, node, npm, karma + friends, chromium and firefox.
+It includes lein, node, npm, shadow-cljs, karma, chromium and firefox.
 
 Karma is set up to render chrome and firefox in virtual frame buffer so 
-it is possible to run tests in container environment.
+it is possible to run tests in container environment in real browsers.
 
-## Supported modes
-chrome, chrome-headless, firefox, nashorn
+## Supported browser modes
+Chrome, ChromeHeadless, Firefox
 
 ## Notes
-Firefox version in alpine linux doesn't support firefox-headless mode.
-Pay attention on test dependencies for nashorn. 
-It will fail the test run in case of any dependencies related to DOM, like react.
+Firefox version in alpine linux doesn't support FirefoxHeadless mode.
 
 ## Usage
-Typical .gitlab-ci.yml may look like this
+Example .gitlab-ci.yml may look like this
 
 ```
-image: raffinate/lein-karma
+image: raffinate/cljs-ci
+
+before_script:
+  - npm install
+
+test:
+  script:
+    - shadow-cljs compile ci
+    - karma start --single-run
+```
+
+or like this
+
+
+```
+image: raffinate/cljs-ci
 
 before_script:
   - lein deps
